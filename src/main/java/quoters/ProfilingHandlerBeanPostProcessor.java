@@ -14,6 +14,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 public class ProfilingHandlerBeanPostProcessor implements BeanPostProcessor {
 
   private Map<String, Class> map = new HashMap<String, Class>();
+  private ProfilingController controller = new ProfilingController();
 
   @Override
   public Object postProcessBeforeInitialization(Object o, String s) throws BeansException {
@@ -25,14 +26,19 @@ public class ProfilingHandlerBeanPostProcessor implements BeanPostProcessor {
   }
 
   @Override
-  public Object postProcessAfterInitialization(Object o, String s) throws BeansException {
-    Class beanClass = map.get(s);
+  public Object postProcessAfterInitialization(final Object o, String s) throws BeansException {
+    final Class beanClass = map.get(s);
     if (beanClass != null) {
       return Proxy.newProxyInstance(beanClass.getClassLoader(), beanClass.getInterfaces(),
           new InvocationHandler() {
             @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-              return null;
+              System.out.println("Профилирую....");
+              long before = System.nanoTime();
+              Object retVal = method.invoke(o, args);
+              long after = System.nanoTime();
+              System.out.println("Всё!");
+              return retVal;
             }
           });
     }
