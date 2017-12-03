@@ -12,4 +12,5 @@
 </bean>
   <bean class="quoters.InjectRandomIntAnnotationBeanPostProcessor" />
   <bean class="quoters.ProfilingHandlerBeanPostProcessor"/>
+  <bean class="quoters.DepricationHandlerBeanFactoryPostProcessor"/>
 </beans>

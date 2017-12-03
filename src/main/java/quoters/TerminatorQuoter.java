@@ -2,9 +2,7 @@ package quoters;
 
 import javax.annotation.PostConstruct;
 
-/**
- * Created by Andrey on 02.12.2017.
- */
+
 @Profiling
 @DepricatedClass(newImpl = T1000.class)
 public class TerminatorQuoter implements Quoter {
@@ -15,7 +13,7 @@ public class TerminatorQuoter implements Quoter {
   private String message;
 
   @PostConstruct
-  public void init(){
+  public void init() {
     System.out.println("Phase 2");
     System.out.println(repeat);
   }
