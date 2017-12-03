@@ -7,6 +7,10 @@ import javax.annotation.PostConstruct;
 @DepricatedClass(newImpl = T1000.class)
 public class TerminatorQuoter implements Quoter {
 
+  public void setRepeat(int repeat) {
+    this.repeat = repeat;
+  }
+
   @InjectRandomInt(min = 2, max = 7)
   private int repeat;
 
